@@ -28,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("Email is Invalid!");
       return;
     }
+    
+      // Check if email already exists
+      let emailExists = data.some(user => user.email === email);
+      if (emailExists) {
+        message.textContent = "Email already registered. Please use another email.";
+        message.style.color = "red";
+        console.log("Email already exists");
+        return;
+      }
 
     if (passkey === "") {
       message.textContent = "Password cannot be empty";
