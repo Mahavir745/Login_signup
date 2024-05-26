@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
   let btn = document.querySelector("#submit");
-  let data = [];
+  
+  // Retrieve existing data from localStorage
+  let data = JSON.parse(localStorage.getItem('userData')) || [];
 
   btn.addEventListener("click", function(e) {
     e.preventDefault();
-    
+
     let email = document.querySelector("#username").value;
     let passkey = document.querySelector("#password").value;
     let confirm = document.querySelector("#confirm_pass").value;
@@ -15,49 +17,63 @@ document.addEventListener('DOMContentLoaded', function() {
     let newdata = {
       email: email,
       password: passkey,
-      confirm_code: confirm,
       address: address,
       qualification: qual
     };
-    
-    let count = 0;
 
-    // Validation Start
-    if (!email.includes('@gmail.com')) {
+    // Validation
+    if (!email.includes('@')) {
       message.textContent = "Check your email";
       message.style.color = "red";
       console.log("Email is Invalid!");
-    } else {
-      count++;
+      return;
     }
 
-    if (passkey !== "") {
-      count++;
+    if (passkey === "") {
+      message.textContent = "Password cannot be empty";
+      message.style.color = "red";
+      console.log("Password is empty");
+      return;
     }
-    
-    if (address !== "") {
-      count++;
+
+    if (passkey.length < 6) {
+      message.textContent = "Password must be at least 6 characters";
+      message.style.color = "red";
+      console.log("Password too short");
+      return;
     }
 
     if (passkey !== confirm) {
       message.textContent = "Password does not match!";
       message.style.color = "red";
       console.log("Password does not match");
-    } else {
-      count++;
+      return;
     }
 
-    // Validation Track Stop
+    if (address === "") {
+      message.textContent = "Address cannot be empty";
+      message.style.color = "red";
+      console.log("Address is empty");
+      return;
+    }
+
+    if (qual === "none") {
+      message.textContent = "Please select a qualification";
+      message.style.color = "red";
+      console.log("Qualification not selected");
+      return;
+    }
 
     // Data Store in Array
-    if (count === 4) {
-      data.push(newdata);
-      message.textContent = "Successfully Registered!";
-      message.style.color = "green";
-      console.log(data);
+    data.push(newdata);
+    message.textContent = "Successfully Registered!";
+    message.style.color = "green";
+    console.log(data);
 
-      // Save data to localStorage for persistence
-      localStorage.setItem('userData', JSON.stringify(data));
-    }
+    // Save data to localStorage for persistence
+    localStorage.setItem('userData', JSON.stringify(data));
+
+    // Clear the form fields after successful submission
+    document.querySelector("#form-data").reset();
   });
 });

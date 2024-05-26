@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Load data from localStorage
-  const data = JSON.parse(localStorage.getItem('userData')) || [];
+  // Load logdata from localStorage
+  const logdata = JSON.parse(localStorage.getItem('userData')) || [];
 
   // Login id enquiry Check
   let login_btn = document.querySelector("#loginButton");
@@ -12,22 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let loginPass = document.querySelector("#Password").value;
     let newmessage = document.querySelector("#newmessage");
 
-    let found = false;
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].email === loginUser && data[i].password === loginPass) {
-        found = true;
-        break;
-      }
-    }
+    let foundUser = logdata.find(user => user.email === loginUser && user.password === loginPass);
 
-    if (found) {
-      newmessage.innerHTML = `Login sucessfull: <a href="view.html" id='view'>View</a>`;
-      let views=document.querySelector("#view")
-      views.click()
+    if (foundUser) {
+      newmessage.innerHTML = `Login successful: <a href="view.html">View</a>`;
       newmessage.style.color = "green";
-
-      localStorage.setItem('result', JSON.stringify(data));
       
+      // Save the current user data to localStorage
+      localStorage.setItem('currentUser', JSON.stringify(foundUser));
+
+      // Redirect to view.html
+      window.location.href = 'view.html';
     } else {
       newmessage.textContent = "Login Failed! Incorrect email or password.";
       newmessage.style.color = "red";
