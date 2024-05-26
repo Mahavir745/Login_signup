@@ -77,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     data.push(newdata);
     // message.textContent = "Successfully Registered!";
     // message.style.color = "green";
-    window.alert("You are successfully Registered!")
+    // window.alert("You are successfully Registered!")
+    window.location.href= "loginpage.html"
     console.log(data);
 
     // Save data to localStorage for persistence
