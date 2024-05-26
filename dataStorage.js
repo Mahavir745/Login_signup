@@ -4,25 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Retrieve existing data from localStorage
   let data = JSON.parse(localStorage.getItem('userData')) || [];
 
-  let reset= document.querySelector("#reset")
-  reset.addEventListener("click",function(){
-    let username="mahavir23@gmail.com";
-    let password="Mahavir23@"
-    const confirm=window.confirm("Only authorized Person allowed!")
-
-    if(confirm){
-    let useroutput=prompt("Authorized member email:")
-    let userpass=prompt("Password: ")
-
-    if(username === useroutput && password === userpass){
-    localStorage.clear()
-    alert("All data has been cleared!")
-    }else{
-      alert('You has not authorized');
-    }
-  }
-  })
-  
   btn.addEventListener("click", function(e) {
     e.preventDefault();
 
@@ -105,4 +86,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear the form fields after successful submission
     document.querySelector("#form-data").reset();
   });
+
+  let reset= document.querySelector("#reset")
+  reset.addEventListener("click",function(){
+    let username="mahavir23@gmail.com";
+    let password="Mahavir23@"
+    const confirm=window.confirm("Only authorized Person allowed!")
+
+    if(confirm){
+    let useroutput=prompt("Authorized member email:")
+    let userpass=prompt("Password: ")
+
+    if(username === useroutput && password === userpass){
+    localStorage.clear()
+    alert("All data has been cleared!")
+    }else{
+      alert('You has not authorized');
+    }
+  }
+  })
+  
 });
