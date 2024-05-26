@@ -30,22 +30,4 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   
-  let reset= document.querySelector("#reset")
-  reset.addEventListener("click",function(){
-    let username="mahavir23@gmail.com";
-    let password="Mahavir23@"
-    const confirm=window.confirm("Only authorized Person allowed!")
-
-    if(confirm){
-    let useroutput=prompt("Authorized member email:")
-    let userpass=prompt("Password: ")
-
-    if(username === useroutput && password === userpass){
-    logdata.clear()
-    alert("All data has been cleared!")
-    }else{
-      alert('You has not authorized');
-    }
-  }
-  })
 });
