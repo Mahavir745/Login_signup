@@ -75,8 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Data Store in Array
     data.push(newdata);
-    message.textContent = "Successfully Registered!";
-    message.style.color = "green";
+    // message.textContent = "Successfully Registered!";
+    // message.style.color = "green";
+    window.alert("You are successfully Registered!")
     console.log(data);
 
     // Save data to localStorage for persistence
