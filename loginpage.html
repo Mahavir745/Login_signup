@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,5 +30,66 @@
 
 </div>
 <script src="logStorage.js" type="module"></script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5 col-lg-6 col-12">
+ <h1 class="bg-success text-white text-center p-2">Login</h1>
+ <form class="form-control mt-4 p-4">
+ <div class="mb-3">
+ <label for="userName" class="form-label">Username:</label>
+ <input type="text" class="form-control" id="userName" required>
+ </div>
+ <div class="mb-3">
+ <label for="Password" class="form-label">Password:</label>
+ <input type="password" class="form-control" id="Password" required>
+ </div>
+ <button type="submit" id="loginButton" class="btn btn-primary w-100">Login</button>
+ </form>
+ <div class="text-center">
+ <p>If you don't have Id <a href="index.html">Sign Up</a></p>
+ </div>
+ <div id="newmessage"></div>
+</div>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+ let login_btn = document.getElementById('loginButton');
+
+ login_btn.addEventListener('click', function(e) {
+ e.preventDefault();
+
+ let loginUser = document.getElementById('userName').value;
+ let loginPass = document.getElementById('Password').value;
+ let newmessage = document.getElementById('newmessage');
+
+ let logdata = JSON.parse(localStorage.getItem('userData')) || [];
+
+ let foundUser = logdata.find(user => user.email === loginUser && user.password === loginPass);
+
+ if (foundUser) {
+ localStorage.setItem('currentUser', JSON.stringify(foundUser));
+ window.location.href = 'view.html';
+ } else {
+ newmessage.textContent = "Login Failed! Incorrect email or password.";
+ newmessage.style.color = "red";
+ }
+ });
+ });
+</script>
 </body>
 </html>
